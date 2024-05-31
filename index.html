@@ -54,14 +54,12 @@
             background-color: transparent; /* X가 먼저 시작하는 버튼의 배경색 설정 */
             color: #000000; /* X가 먼저 시작하는 버튼의 텍스트 색상 */
             font-weight: 800; /* 폰트를 더 두껍게 설정 */
-            border-width: 1000;
         }
         .start-button.O {
             border-color: #ffffff; /* O가 먼저 시작하는 버튼의 테두리 색상 */
             background-color: transparent; /* O가 먼저 시작하는 버튼의 배경색 설정 */
             color: #ffffff; /* O가 먼저 시작하는 버튼의 텍스트 색상 */
             font-weight: 800; /* 폰트를 더 두껍게 설정 */
-            border-width: 1000;
         }
         .start-button.selected.X {
             background-color: #ffffff; /* X 버튼 선택 시 배경색 */
@@ -157,11 +155,12 @@
             cell.textContent = '';
             cell.classList.remove("X", "O"); // 클래스를 초기화
         });
-        document.querySelectorAll('.start-button').forEach(button => {
-            button.classList.remove('selected', 'disabled', 'X', 'O');
-            button.style.backgroundColor = 'transparent'; // 버튼 배경색 초기화
-            button.style.color = ''; // 버튼 텍스트 색상 초기화
-        });
+        document.querySelector('.start-button.X').classList.remove('selected', 'disabled');
+        document.querySelector('.start-button.O').classList.remove('selected', 'disabled');
+        document.querySelector('.start-button.X').style.backgroundColor = 'transparent';
+        document.querySelector('.start-button.X').style.color = '#000000';
+        document.querySelector('.start-button.O').style.backgroundColor = 'transparent';
+        document.querySelector('.start-button.O').style.color = '#ffffff';
         gameStarted = false; // 게임을 리셋하고 다시 시작할 수 있도록 설정
     }
 

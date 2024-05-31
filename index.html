@@ -73,6 +73,13 @@
             pointer-events: none; /* 버튼 비활성화 */
             opacity: 0.5; /* 버튼 비활성화 시 투명도 */
         }
+        .cat-image {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 100px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +99,8 @@
 
 <button class="start-button X" onclick="startGame('X')">게임 시작 (X 먼저)</button>
 <button class="start-button O" onclick="startGame('O')">게임 시작 (O 먼저)</button>
+
+<img src="https://www.wooripet.co.kr/data/file/come3/2943609371_jwTaDRJ0_KakaoTalk_20190426_195503149.jpg" alt="렉돌 고양이" class="cat-image">
 
 <script>
     let currentPlayer = "X";

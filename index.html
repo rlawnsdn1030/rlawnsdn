@@ -159,6 +159,8 @@
         });
         document.querySelectorAll('.start-button').forEach(button => {
             button.classList.remove('selected', 'disabled', 'X', 'O');
+            button.style.backgroundColor = 'transparent'; // 버튼 배경색 초기화
+            button.style.color = ''; // 버튼 텍스트 색상 초기화
         });
         gameStarted = false; // 게임을 리셋하고 다시 시작할 수 있도록 설정
     }

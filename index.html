@@ -73,6 +73,22 @@
             pointer-events: none; /* 버튼 비활성화 */
             opacity: 0.5; /* 버튼 비활성화 시 투명도 */
         }
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .restart-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid;
+            border-radius: 20px; /* 테두리 둥글게 */
+            cursor: pointer;
+            margin: 5px; /* 버튼 사이의 간격 추가 */
+            background-color: #ffffff;
+            color: #000000;
+        }
         .cat-image {
             position: fixed;
             bottom: 10px;
@@ -100,7 +116,10 @@
 <button class="start-button X" onclick="startGame('X')">게임 시작 (X 먼저)</button>
 <button class="start-button O" onclick="startGame('O')">게임 시작 (O 먼저)</button>
 
-<img src="https://www.wooripet.co.kr/data/file/come3/2943609371_jwTaDRJ0_KakaoTalk_20190426_195503149.jpg" alt="렉돌 고양이" class="cat-image">
+<div class="result" id="result"></div>
+<button class="restart-button" onclick="restartGame()">재시작</button>
+
+<img src="https://via.placeholder.com/100" alt="렉돌 고양이" class="cat-image">
 
 <script>
     let currentPlayer = "X";
@@ -118,13 +137,13 @@
             board[cellIndex] = currentPlayer;
             const winner = checkWin();
             if (winner) {
-                alert(winner + "가 이겼습니다!");
-                resetGame();
+                displayResult(winner + "가 이겼습니다!");
+                gameStarted = false; // 게임을 종료 상태로 설정
                 return;
             }
             if (checkDraw()) {
-                alert("무승부입니다!");
-                resetGame();
+                displayResult("무승부입니다!");
+                gameStarted = false; // 게임을 종료 상태로 설정
                 return;
             }
             currentPlayer = currentPlayer === "X" ? "O" : "X";
@@ -157,20 +176,9 @@
         });
     }
 
-    function resetGame() {
-        currentPlayer = "X";
-        board = ['', '', '', '', '', '', '', '', ''];
-        document.querySelectorAll('.cell').forEach(cell => {
-            cell.textContent = '';
-            cell.classList.remove("X", "O"); // 클래스를 초기화
-        });
-        document.querySelector('.start-button.X').classList.remove('selected', 'disabled');
-        document.querySelector('.start-button.O').classList.remove('selected', 'disabled');
-        document.querySelector('.start-button.X').style.backgroundColor = 'transparent';
-        document.querySelector('.start-button.X').style.color = '#000000';
-        document.querySelector('.start-button.O').style.backgroundColor = 'transparent';
-        document.querySelector('.start-button.O').style.color = '#ffffff';
-        gameStarted = false; // 게임을 리셋하고 다시 시작할 수 있도록 설정
+    function displayResult(message) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.textContent = message;
     }
 
     function startGame(firstPlayer) {
@@ -183,6 +191,11 @@
         const selectedButton = document.querySelector(`.start-button.${firstPlayer}`);
         selectedButton.classList.add('selected', firstPlayer);
         selectedButton.classList.remove('disabled');
+        document.getElementById('result').textContent = ""; // 게임 시작 시 결과 메시지 초기화
+    }
+
+    function restartGame() {
+        location.reload(); // 페이지 새로고침
     }
 </script>
 

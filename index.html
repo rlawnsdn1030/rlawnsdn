@@ -63,8 +63,13 @@
             font-weight: 800; /* 폰트를 더 두껍게 설정 */
             border-width: 1000;
         }
-        .start-button.selected {
-            background-color: #dcdcdc; /* 선택된 버튼의 배경색 */
+        .start-button.selected.X {
+            background-color: #ffffff; /* X 버튼 선택 시 배경색 */
+            color: #000000; /* X 버튼 선택 시 텍스트 색상 */
+        }
+        .start-button.selected.O {
+            background-color: #000000; /* O 버튼 선택 시 배경색 */
+            color: #ffffff; /* O 버튼 선택 시 텍스트 색상 */
         }
         .start-button.disabled {
             pointer-events: none; /* 버튼 비활성화 */
@@ -153,7 +158,7 @@
             cell.classList.remove("X", "O"); // 클래스를 초기화
         });
         document.querySelectorAll('.start-button').forEach(button => {
-            button.classList.remove('selected', 'disabled');
+            button.classList.remove('selected', 'disabled', 'X', 'O');
         });
         gameStarted = false; // 게임을 리셋하고 다시 시작할 수 있도록 설정
     }
@@ -165,8 +170,9 @@
             button.classList.remove('selected');
             button.classList.add('disabled');
         });
-        document.querySelector(`.start-button.${firstPlayer}`).classList.add('selected');
-        document.querySelector(`.start-button.${firstPlayer}`).classList.remove('disabled');
+        const selectedButton = document.querySelector(`.start-button.${firstPlayer}`);
+        selectedButton.classList.add('selected', firstPlayer);
+        selectedButton.classList.remove('disabled');
     }
 </script>
 

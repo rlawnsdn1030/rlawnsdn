@@ -30,7 +30,7 @@
         .cell.O {
             color: #ffffff; /* O의 색깔 */
         }
-        h1{
+        h1 {
             text-align: center;
             font-family: "Black Han Sans", sans-serif;
             font-weight: 400;
@@ -137,12 +137,12 @@
             board[cellIndex] = currentPlayer;
             const winner = checkWin();
             if (winner) {
-                displayResult(winner + "가 이겼습니다!");
+                displayResult(winner + "가 이겼습니다!", winner);
                 gameStarted = false; // 게임을 종료 상태로 설정
                 return;
             }
             if (checkDraw()) {
-                displayResult("무승부입니다!");
+                displayResult("무승부입니다!", "draw");
                 gameStarted = false; // 게임을 종료 상태로 설정
                 return;
             }
@@ -176,9 +176,16 @@
         });
     }
 
-    function displayResult(message) {
+    function displayResult(message, winner) {
         const resultDiv = document.getElementById('result');
         resultDiv.textContent = message;
+        if (winner === "X") {
+            resultDiv.style.color = "#000000"; // X가 이기면 검은색
+        } else if (winner === "O") {
+            resultDiv.style.color = "#ffffff"; // O가 이기면 흰색
+        } else if (winner === "draw") {
+            resultDiv.style.color = "#ffff00"; // 무승부면 노란색
+        }
     }
 
     function startGame(firstPlayer) {

@@ -63,6 +63,13 @@
             font-weight: 800; /* 폰트를 더 두껍게 설정 */
             border-width: 1000;
         }
+        .start-button.selected {
+            background-color: #dcdcdc; /* 선택된 버튼의 배경색 */
+        }
+        .start-button.disabled {
+            pointer-events: none; /* 버튼 비활성화 */
+            opacity: 0.5; /* 버튼 비활성화 시 투명도 */
+        }
     </style>
 </head>
 <body>
@@ -145,12 +152,21 @@
             cell.textContent = '';
             cell.classList.remove("X", "O"); // 클래스를 초기화
         });
+        document.querySelectorAll('.start-button').forEach(button => {
+            button.classList.remove('selected', 'disabled');
+        });
         gameStarted = false; // 게임을 리셋하고 다시 시작할 수 있도록 설정
     }
 
     function startGame(firstPlayer) {
         gameStarted = true;
         currentPlayer = firstPlayer;
+        document.querySelectorAll('.start-button').forEach(button => {
+            button.classList.remove('selected');
+            button.classList.add('disabled');
+        });
+        document.querySelector(`.start-button.${firstPlayer}`).classList.add('selected');
+        document.querySelector(`.start-button.${firstPlayer}`).classList.remove('disabled');
     }
 </script>
 
